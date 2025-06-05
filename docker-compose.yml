@@ -15,12 +15,15 @@ services:
 
   web:
     build: .
-    ports:
-      - "8080:80"
     depends_on:
       - db
-    networks:
-      - backend
+    ports:
+      - "8080:80"
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
 
 volumes:
   pgdata:
